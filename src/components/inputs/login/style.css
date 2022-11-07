@@ -1,0 +1,13 @@
+ .error_text{
+text-align: center;
+color: rgb(236, 45, 45);
+ }
+
+ .success_text{
+text-align: center;
+color:rgb(6, 181, 73)
+ }
+
+ .loader{
+   
+ }

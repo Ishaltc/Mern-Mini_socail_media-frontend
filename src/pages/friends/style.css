@@ -1,0 +1,58 @@
+.friends {
+  height: calc(100vh -56px);
+  width: 100%;
+  margin-top: 1px;
+  display: grid;
+  
+}
+
+.friends_left {
+  width: 20%;
+  background: #f9f9f9;
+ box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  padding: 10px;
+  width: 320px;
+  height:100vh;
+}
+.friends_right{
+    padding: 2rem;
+    position: absolute;
+    top:56px;
+    left:360px;
+}
+
+.friends_left_wrapper:hover {
+  background: rgb(228, 228, 228);
+}
+
+.friends_left_wrapper {
+  position: relative;
+  display: flex;
+
+  padding-bottom: 20px;
+}
+.mmenu_item {
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.friends_left_wrapper span {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: large;
+  font-weight: 600;
+  padding-left: 32px;
+  cursor: pointer;
+}
+
+.friends_right_wrap{
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+.friends_right_wrap .flex_wrap{
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap:15px;
+}
