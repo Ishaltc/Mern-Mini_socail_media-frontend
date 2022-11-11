@@ -10,6 +10,9 @@ import Profile from "./pages/profile";
 import MyFriends from "./pages/friends";
 import Header from "./components/header";
 import HomeModel from "./pages/home/HomeModel";
+import Reset from "./components/inputs/login/Reset";
+import ConfirmPassword from "./components/inputs/login/ConfirmPassword";
+import ValidatingCode from "./components/inputs/login/ValidatingCode";
 
 function App() {
   return (
@@ -26,6 +29,9 @@ function App() {
         <Route element={<NotLoggedInRoutes/>}>
         <Route path="/login" element={<LoginInput />} exact/>
         <Route path="/signup" element={<RegisterInput />} exact/>
+        <Route path="/reset" element ={<Reset/>} exact/>
+        <Route path="/validatingCode" element ={<ValidatingCode/>} exact/>
+        <Route path="/confirmPassword" element ={<ConfirmPassword/>} exact/>
         </Route>
       </Routes>
     </div>

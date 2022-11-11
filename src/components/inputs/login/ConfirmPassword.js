@@ -16,7 +16,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./style.css";
 import RingLoader from "react-spinners/RingLoader";
 
@@ -40,44 +40,45 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function LoginInput() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+export default function ConfirmPassword() {
+  const { state } = useLocation();
+
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
+  const [password, setPassword] = useState("");
+  const [rePassword, setRePassword] = useState("");
+  const [success, setSuccess] = useState("");
+  const email = state.email;
+  const theme = createTheme();
   const navigate = useNavigate();
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
+  const passwordHandler = (e) => {
     setPassword(e.target.value);
   };
+  const rePasswordHandler = (e) => {
+    setRePassword(e.target.value);
+  };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      const datas = new FormData(event.currentTarget);
-
       setLoading(true);
+      setError("")
 
       const { data } = await axios.post(
-        `${process.env.REACT_APP_API_URL}/login`,
+        `${process.env.REACT_APP_API_URL}/newPassword `,
         {
           email,
           password,
+          rePassword,
         }
       );
-    
-      dispatch({ type: "LOGIN", payload: data });
-      Cookies.set("user", JSON.stringify(data));
-      navigate("/");
+      setSuccess(data.message);
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     } catch (error) {
-      console.log(error);
       setLoading(false);
+      setSuccess("");
       setError(error.response.data.message);
     }
   };
@@ -98,7 +99,7 @@ export default function LoginInput() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Login
+            Confirm Password
           </Typography>
           <Box
             component="form"
@@ -111,41 +112,40 @@ export default function LoginInput() {
                 <TextField
                   required
                   fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  onChange={handleEmailChange}
+                  id="password"
+                  label="New password"
+                  name="password"
+                  onChange={passwordHandler}
                   autoComplete="email"
                 />
+
+                {error && <div className="error_text">{error}</div>}
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  onChange={handlePasswordChange}
+                  name="rePassword"
+                  label="Confirm Password"
+                  type="rePassword"
+                  id="rePassword"
+                  onChange={rePasswordHandler}
                   autoComplete="new-password"
                 />
               </Grid>
               <Grid item xs={12}></Grid>
             </Grid>
-            {error && <div className="error_text">{error}</div>}
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Confirm
             </Button>
-            <div className="reset">
-            <Link href="/reset" variant="body2">
-           <p> Forgot Password?</p>
-            </Link>
-            </div>
+            {success && <div className="success_text">{success}</div>}
+            <div className="reset"></div>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <RingLoader
                 loading={loading}
@@ -156,13 +156,7 @@ export default function LoginInput() {
             </div>
 
             <Grid container justifyContent="flex-end">
-              <Grid item>
-                {!loading && (
-                  <Link href="/signup" variant="body2">
-                    Don't you have account? Sign up
-                  </Link>
-                )}
-              </Grid>
+              <Grid item></Grid>
             </Grid>
           </Box>
         </Box>

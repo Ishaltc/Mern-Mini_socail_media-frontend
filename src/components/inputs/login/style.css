@@ -11,3 +11,16 @@ color:rgb(6, 181, 73)
  .loader{
    
  }
+ .reset{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    cursor: pointer;
+ }
+ .input_email{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:300px;
+    height:60px
+ }

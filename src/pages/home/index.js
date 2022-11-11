@@ -29,7 +29,7 @@ const getData = async()=>{
     setAllUsers(data.data)
 }
 
-//console.log(allUsers);
+
 
 const addFriendFun = async(id)=>{
     await addFriend(id ,user.token)
